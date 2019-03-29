@@ -1,16 +1,21 @@
 <template>
-  <div class="board-outer">
-    <v-btn-toggle v-model="opened_squares" multiple>
-      <div class="board">
-        <v-btn  v-for="element in array"  v-on:click="open(element)">
-          <!-- <div class="board-item"> -->
-          <!-- {{element}} -->
-          <!-- </div> -->
-          <div> {{squares[element]}} </div>
-        </v-btn>
-      </div>
-    </v-btn-toggle>
-  </div>
+    <div>
+    <v-btn v-on:click="reset()">
+    reset
+    </v-btn>
+    <div class="board-outer">
+        <v-btn-toggle v-model="opened_squares" multiple>
+        <div class="board">
+            <v-btn  v-for="element in array"  v-on:click="open(element)">
+            <!-- <div class="board-item"> -->
+            <!-- {{element}} -->
+            <!-- </div> -->
+            <div> {{squares[element]}} </div>
+            </v-btn>
+        </div>
+        </v-btn-toggle>
+    </div>
+    </div>
 </template>
 
 <script>
@@ -69,6 +74,13 @@ export default {
                     this.bombs.push(n)
                 }
         })
+    },
+    reset: function() {
+        this.opened_squares = []
+        this.bombs = []
+        this.getBoard()
+        this.gameover = false
+        this.squares = [...Array(64).keys()].fill('')
     }
   }
 };
